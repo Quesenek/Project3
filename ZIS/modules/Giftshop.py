@@ -53,14 +53,14 @@ class GiftShop:
         db.executeDatabase(f"Alter information for customer {random.randint(1, 10000)} to {nameList[random.randint(0, 3)]}")
         db.closeConnection()
 
-    def CreateTransaction(self):
+    def createTransaction(self):
         db = self.db
         print(f"{inspect.stack()[0][3]} Method Accessed")
         db.connectDatabase()
         db.executeDatabase(f"Create new transaction for order number {random.randint(1, 1000)}")
         db.closeConnection()
 
-        self.receiptPrintout(self)
+        self.receiptPrintout()
 
     def receiptPrintout(self):
         print(f"{inspect.stack()[0][3]} Method Accessed")

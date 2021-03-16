@@ -46,4 +46,4 @@ class WildlifeCare:
     def print(self):
         db = self.db
         print(f"{inspect.stack()[0][3]} Method Accessed")
-        print(f"Printing the animal information based on: {animalInfo()}")
+        print(f"Printing the animal information based on: animalInfo()")

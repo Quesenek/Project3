@@ -33,48 +33,86 @@ def getUserInput(state):
         displayInfoValues = []
         displayInfoValues1 = []
 
-        looping = True
-        while looping:
+        Outerloop = True
+        while Outerloop:
             clear()
 
             displayInfoValues = ["staff", ""]
             displayInfo(displayInfoValues)
 
-            userInput = input("Enter one of the above to use the service, or exit to return to the main menu ")
-            if(userInput == "exit"):
+            userInput = input("Enter one of the above to use the service, or exit to return to the main menu, or close to exit completely ")
+            if(str(userInput) == "exit"):
                 getUserInput("init")
-            displayInfoValues1 = ["check", str(userInput)]
+            elif(str(userInput) == "close"):
+                clear()
+                break
+            displayInfoValues1 = ["checkKey", str(userInput)]
             if(displayInfo(displayInfoValues1)):
-                looping = False
-                print("entered")
-                displayInfoValues = ["staff", userInput]
-        displayInfo(displayInfoValues)
+                Outerloop = False
+                displayInfoValues = ["staff", str(userInput)]
+
+                key = str(userInput)
+
+                innerLoop = True
+                while innerLoop:
+                    clear()
+                    displayInfo(displayInfoValues)
+                    
+                    userInput = input("Enter one of the above to use the service, or up to return to the menu above, or exit to return to the main menu, or close to exit completely ")
+                    if(str(userInput) == "up"):
+                        innerLoop = False
+                        Outerloop = True
+                    elif(str(userInput) == "exit"):
+                        getUserInput("init")
+                    elif(str(userInput) == "close"):
+                        clear()
+                        break
+
+                    tempString = ""
+                    for x, y in enumerate(userInput):
+                        if(x == 0):
+                            tempString += y.upper()
+                        else:
+                            tempString += y.lower()
+
+                    userInput = tempString
+
+                    displayInfoValues1 = ["checkValues", key, str(userInput)]
+                    if(displayInfo(displayInfoValues1)):
+                        clear()
+                        methodInfoValues = ["staff", key, str(userInput)]
+                        getMethod(methodInfoValues)
+                        userInput = input("Enter next to do another task, up to go back one level, or exit to restart, or close to exit completely ")
+                        if(str(userInput) == "next"):
+                            pass
+                        elif(str(userInput) == "up"):
+                            innerLoop = False
+                            Outerloop = True
+                        elif(str(userInput) == "exit"):
+                            getUserInput("init")
+                        elif(str(userInput) == "close"):
+                            clear()
+                            break
+        
 
 def displayInfo(displayValue):
     staffPortalNames = ["Staff", "WildlifeInfo", "WildlifeCare", "SalesInformation", "GiftShop"]
-    # staffMethodNames = {"Staff": ["lookUpStaff","modifyStaffInfo","createStaff","getSchedule","createSchedule","modifySchedule","printSchedule","getTasks","createTasks","modifyTasks","printTasks"],
-    #                     "WildlifeInfo": ["lookUp","modifyWildlifeInfo","createWildlifeInfo"],
-    #                     "WildlifeCare": ["animalInfo","careRoutine","createCareRoutine","modifyCareRoutine","schedule","print"],
-    #                     "SalesInformation": ["getTicketPrice","setTicketPrice","modifyTicketPrice","getCustomerInformation","createCustomerInformation","modifyCustomerInformation","createTransaction","receiptPrintout"],
-    #                     "GiftShop": ["displayInventory","modifyInventory","createInventory","getCustomerInformation","createCustomerInformation","modifyCustomerInformation","CreateTransaction","receiptPrintout"]}
     staffMethodNames = {"Staff": ["Look up staff","Modify staff info","Create staff","Get schedule","Create schedule","Modify schedule","Print schedule","Get tasks","Create tasks","Modify tasks","Print tasks"],
                         "WildlifeInfo": ["Look up animal","Modify wildlife info","Create wildlife info"],
                         "WildlifeCare": ["Get Animal info","Care routine","Create care routine","Modify care routine","Schedule","Print"],
                         "SalesInformation": ["Get ticket price","Set ticket price","Modify ticket price","Get customer information","Create customer information","Modify customer information","Create transaction","Receipt printout"],
                         "GiftShop": ["Display inventory","Modify inventory","Create inventory","Get customer information","Create customer information","Modify customer information","Create transaction","Receipt printout"]}
 
-    displayValue[0] = displayValue[0].lower()
-    print(f"{displayValue[0]} {displayValue[1]}")
-
     if(displayValue[0] == "staff" and displayValue[1] == ""):
         for x in staffPortalNames:
             print(x)
-    elif(displayValue[0] == "check"):
+    elif(displayValue[0] == "checkKey"):
         return displayValue[1] in staffPortalNames
+    elif(displayValue[0] == "checkValues"):
+        return displayValue[2] in staffMethodNames[displayValue[1]]
     elif(displayValue[0] == "staff" and displayValue[1] != ""):
         for x in staffMethodNames[displayValue[1]]:
             print(x)
-        print("Modify inventory" in staffMethodNames["GiftShop"])
 
 def getMethod(methodInfo):
     db = Database
@@ -111,6 +149,60 @@ def getMethod(methodInfo):
                 staffPortalModules[methodInfo[1]].modifyTasks()
             elif(methodInfo[2] == "Print tasks"):
                 staffPortalModules[methodInfo[1]].printTasks()    
+        elif(methodInfo[1] == "WildlifeInfo"):
+            if(methodInfo[2] == "Look up animal"):
+                staffPortalModules[methodInfo[1]].lookUp()
+            elif(methodInfo[2] == "Modify wildlife info"):
+                staffPortalModules[methodInfo[1]].modifyWildlifeInfo()
+            elif(methodInfo[2] == "Create wildlife info"):
+                staffPortalModules[methodInfo[1]].createWildlifeInfo()
+        elif(methodInfo[1] == "WildlifeCare"):
+            if(methodInfo[2] == "Get Animal info"):
+                staffPortalModules[methodInfo[1]].animalInfo()
+            elif(methodInfo[2] == "Care routine"):
+                staffPortalModules[methodInfo[1]].careRoutine()
+            elif(methodInfo[2] == "Create care routine"):
+                staffPortalModules[methodInfo[1]].createCareRoutine()
+            elif(methodInfo[2] == "Modify care routine"):
+                staffPortalModules[methodInfo[1]].modifyCareRoutine()
+            elif(methodInfo[2] == "Schedule"):
+                staffPortalModules[methodInfo[1]].schedule()
+            elif(methodInfo[2] == "Print"):
+                staffPortalModules[methodInfo[1]].print()
+        elif(methodInfo[1] == "SalesInformation"):
+            if(methodInfo[2] == "Get ticket price"):
+                staffPortalModules[methodInfo[1]].getTicketPrice()
+            elif(methodInfo[2] == "Set ticket price"):
+                staffPortalModules[methodInfo[1]].setTicketPrice()
+            elif(methodInfo[2] == "Modify ticket price"):
+                staffPortalModules[methodInfo[1]].modifyTicketPrice()
+            elif(methodInfo[2] == "Get customer information"):
+                staffPortalModules[methodInfo[1]].getCustomerInformation()
+            elif(methodInfo[2] == "Create customer information"):
+                staffPortalModules[methodInfo[1]].createCustomerInformation()
+            elif(methodInfo[2] == "Modify customer information"):
+                staffPortalModules[methodInfo[1]].modifyCustomerInformation()
+            elif(methodInfo[2] == "Create transaction"):
+                staffPortalModules[methodInfo[1]].createTransaction()
+            elif(methodInfo[2] == "Receipt printout"):
+                staffPortalModules[methodInfo[1]].receiptPrintout()
+        elif(methodInfo[1] == "GiftShop"):
+            if(methodInfo[2] == "Display inventory"):
+                staffPortalModules[methodInfo[1]].displayInventory()
+            elif(methodInfo[2] == "Modify inventory"):
+                staffPortalModules[methodInfo[1]].modifyInventory()
+            elif(methodInfo[2] == "Create inventory"):
+                staffPortalModules[methodInfo[1]].createInventory()
+            elif(methodInfo[2] == "Get customer information"):
+                staffPortalModules[methodInfo[1]].getCustomerInformation()
+            elif(methodInfo[2] == "Create customer information"):
+                staffPortalModules[methodInfo[1]].createCustomerInformation()
+            elif(methodInfo[2] == "Modify customer information"):
+                staffPortalModules[methodInfo[1]].modifyCustomerInformation()
+            elif(methodInfo[2] == "Create transaction"):
+                staffPortalModules[methodInfo[1]].createTransaction()
+            elif(methodInfo[2] == "Receipt printout"):
+                staffPortalModules[methodInfo[1]].receiptPrintout()   
     elif(methodInfo[0] == "website"):
         pass
 

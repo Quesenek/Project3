@@ -60,7 +60,7 @@ class SalesInformation:
         db.executeDatabase(f"Create new transaction for order number {random.randint(1, 1000)}")
         db.closeConnection()
 
-        self.receiptPrintout(self)
+        self.receiptPrintout()
 
     def receiptPrintout(self):
         print(f"{inspect.stack()[0][3]} Method Accessed")

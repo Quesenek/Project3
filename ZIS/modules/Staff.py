@@ -51,7 +51,7 @@ class Staff:
     def printSchedule(self):
         db = self.db
         print(f"{inspect.stack()[0][3]} Method Accessed")
-        print(f"Printing the schedule based on: {self.printSchedule()}")
+        print(f"Printing the schedule based on: getSchedule()")
 
     def getTasks(self):
         db = self.db
@@ -77,4 +77,4 @@ class Staff:
     def printTasks(self):
         db = self.db
         print(f"{inspect.stack()[0][3]} Method Accessed")
-        print(f"Printing the tasks based on: {self.getTasks()}")
+        print(f"Printing the tasks based on: getTasks()")
