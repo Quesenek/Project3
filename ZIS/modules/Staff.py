@@ -1,5 +1,11 @@
 import inspect
 
+#Created By: Marcus Taylor
+#Date: 03-16-21
+
+#Staff module, skeleton structure
+#inspect allows for the method name to be sent to be printed
+#Methods defined will mostly be used to connect and pull information from the database to be used, other methods to fully implement features unknown
 class Staff:
     
     def __init__(self, database):

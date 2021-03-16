@@ -1,6 +1,12 @@
 import inspect
 import random
 
+#Created By: Marcus Taylor
+#Date: 03-16-21
+
+#AlterZooInformation module, skeleton structure
+#inspect allows for the method name to be sent to be printed
+#Methods defined will mostly be used to connect and pull information from the database to be used, other methods to fully implement features unknown
 class AlterZooInformation:
     def __init__(self, database):
         super().__init__()
