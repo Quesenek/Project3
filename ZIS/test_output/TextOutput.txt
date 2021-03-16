@@ -1,0 +1,73 @@
+Initial Screen:
+
+Welcome to the Zoo Information System
+Input staff or website to start using the service: 
+
+Input text = staff
+
+Staff
+WildlifeInfo
+WildlifeCare
+SalesInformation
+GiftShop
+Enter one of the above to use the service, or exit to return to the main menu, or close to exit completely 
+
+Input text = Staff
+
+Look up staff
+Modify staff info
+Create staff
+Get schedule
+Create schedule
+Modify schedule
+Print schedule
+Get tasks
+Create tasks
+Modify tasks
+Print tasks
+Enter one of the above to use the service, or up to return to the menu above, or exit to return to the main menu, or close to exit completely
+
+Input text = look up staff
+
+lookUpStaff Method Accessed
+connectDatabase Method Accessed
+(queryDatabase accessed) Query: lookUpStaff
+closeConnection Method Accessed
+Enter next to do another task, up to go back one level, or exit to restart, or close to exit completely 
+
+Input text = next
+
+Look up staff
+Modify staff info
+Create staff
+Get schedule
+Create schedule
+Modify schedule
+Print schedule
+Get tasks
+Create tasks
+Modify tasks
+Print tasks
+Enter one of the above to use the service, or up to return to the menu above, or exit to return to the main menu, or close to exit completely
+
+Input text = get tasks
+
+getTasks Method Accessed
+connectDatabase Method Accessed
+(queryDatabase accessed) Query: getTasks
+closeConnection Method Accessed
+Enter next to do another task, up to go back one level, or exit to restart, or close to exit completely 
+
+Input text = up
+
+Staff
+WildlifeInfo
+WildlifeCare
+SalesInformation
+GiftShop
+Enter one of the above to use the service, or exit to return to the main menu, or close to exit completely
+
+Input text = exit
+
+Welcome to the Zoo Information System
+Input staff or website to start using the service:
