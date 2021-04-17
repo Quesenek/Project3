@@ -1,4 +1,6 @@
 import inspect
+from randomuser import RandomUser
+import os
 
 #Created By: Marcus Taylor
 #Date: 03-16-21
@@ -13,11 +15,42 @@ class Staff:
         self.db = database
 
     def lookUpStaff(self):
+        clear = lambda: os.system('cls')
         db = self.db
         print(f"{inspect.stack()[0][3]} Method Accessed")
         db.connectDatabase()
         db.queryDatabase(f"{inspect.stack()[0][3]}")
         db.closeConnection()
+        self.getStaff(clear)
+    
+    def getStaff(self, clear):
+        user_list = RandomUser.generate_users(10, {'nat': 'us'})
+        RandomUser.get_first_name
+        for x in user_list:
+            print(x.get_full_name())
+
+        outerLoop = True
+        while outerLoop:
+            userInput = input("Enter the name in (format: first last ) to look up info: exit to restart, or close to exit completely ")
+            
+            stringSplit = userInput.split(" ")
+
+            for x in user_list:
+                if(x.get_first_name().lower() == stringSplit[0].lower() and x.get_last_name().lower() == stringSplit[1].lower()):
+                    clear()
+                    print(f"Name: {x.get_full_name()}\nDOB: {x.get_dob()[:10]}\nID: {x.get_id()}\nPhone: {x.get_phone()}\nAddress: {x.get_street()}\nState: FL\n")
+
+            
+            userInput1 = input("Enter next to query another staff member or exit to restart, or close to exit completely ")
+            if(str(userInput) == "exit"):
+                break
+            elif(str(userInput) == "close"):
+                clear()
+                break
+            if(str(userInput1) == "next"):
+                clear()
+                for x in user_list:
+                    print(x.get_full_name())
 
     def modifyStaffInfo(self):
         db = self.db

@@ -24,6 +24,7 @@ class CustomerLogin:
         db.closeConnection()
 
     def getCustomerInfo(self):
+        self.authentication()
         if(self.auth):
             db = self.db
             print(f"{inspect.stack()[0][3]} Method Accessed")
@@ -34,6 +35,7 @@ class CustomerLogin:
             print("User not logged in")
 
     def modifyCustomerInfo(self):
+        self.authentication()
         if(self.auth):
             nameList = ['Mark', 'Bobby', 'Angel', 'Stan']
             db = self.db
@@ -45,6 +47,7 @@ class CustomerLogin:
             print("User not logged in")
 
     def createCustomerInfo(self):
+        self.authentication()
         if(self.auth):
             nameList = ['Mark', 'Bobby', 'Angel', 'Stan']
             db = self.db
